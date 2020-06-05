@@ -94,6 +94,32 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             </Typography>
           </CardContent>
         </Grid>
+
+        <Grid
+          item
+          component={Card}
+          xs={12}
+          md={3}
+          className={cx(styles.card, styles.recoveryRate)}
+        >
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Recovery Rate(%)
+            </Typography>
+            <Typography variant="h5">
+              <CountUp
+                start={0}
+                end={(recovered.value / (confirmed.value - deaths.value)) * 100}
+                duration={2.5}
+                separator=","
+              />
+            </Typography>
+            <Typography color="textSecondary">
+              {new Date().toDateString()}
+            </Typography>
+            <Typography variant="body2">Recovery % as of today</Typography>
+          </CardContent>
+        </Grid>
       </Grid>
     </div>
   );

@@ -15,7 +15,9 @@
 .deaths {
   border-bottom: 10px solid rgba(255, 0, 0, 0.5);
 }
-
+.recoveryRate {
+  border-bottom: 10px solid rgba(0, 255, 106, 0.5);
+}
 @media (max-width: 770px) {
   .card {
     margin: 2% 0 !important;
