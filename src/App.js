@@ -5,7 +5,7 @@ import Chart from "./components/Chart/Chart";
 import CountryPicker from "./components/CountryPicker/CountryPicker";
 
 import styles from "./App.module.css";
-import { fetchData } from "./api";
+import { fetchData, fetchStatewiseIndiaData } from "./api";
 import coronaImage from "./images/image.png";
 
 class App extends React.Component {
@@ -15,6 +15,12 @@ class App extends React.Component {
   };
   async componentDidMount() {
     const fetchedData = await fetchData();
+    const fetchedStateData = await fetchStatewiseIndiaData();
+    console.log(
+      fetchedStateData["Andaman and Nicobar Islands"]["districtData"][
+        "Nicobars"
+      ].active
+    );
     this.setState({ data: fetchedData });
   }
   handleCountryChange = async (country) => {

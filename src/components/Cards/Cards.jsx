@@ -27,7 +27,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <Typography variant="h5">
               <CountUp
                 start={0}
-                end={confirmed.value}
+                end={confirmed.value - recovered.value}
                 duration={2.5}
                 separator=","
               />
@@ -47,7 +47,7 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
           md={3}
           className={cx(styles.card, styles.recovered)}
         >
-          <CardContent>
+          {/* <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Recovered
             </Typography>
@@ -65,6 +65,23 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <Typography variant="body2">
               Number of recoveries from COVID-19
             </Typography>
+          </CardContent> */}
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Recovery Rate(%)
+            </Typography>
+            <Typography variant="h5">
+              <CountUp
+                start={0}
+                end={(recovered.value / (confirmed.value - deaths.value)) * 100}
+                duration={2.5}
+                separator=","
+              />
+            </Typography>
+            <Typography color="textSecondary">
+              {new Date().toDateString()}
+            </Typography>
+            <Typography variant="body2">Recovery % as of today</Typography>
           </CardContent>
         </Grid>
         <Grid
@@ -92,32 +109,6 @@ const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
             <Typography variant="body2">
               Number of deaths caused by COVID-19
             </Typography>
-          </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          component={Card}
-          xs={12}
-          md={3}
-          className={cx(styles.card, styles.recoveryRate)}
-        >
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Recovery Rate(%)
-            </Typography>
-            <Typography variant="h5">
-              <CountUp
-                start={0}
-                end={(recovered.value / (confirmed.value - deaths.value)) * 100}
-                duration={2.5}
-                separator=","
-              />
-            </Typography>
-            <Typography color="textSecondary">
-              {new Date().toDateString()}
-            </Typography>
-            <Typography variant="body2">Recovery % as of today</Typography>
           </CardContent>
         </Grid>
       </Grid>

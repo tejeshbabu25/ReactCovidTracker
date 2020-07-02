@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const url = "https://covid19.mathdro.id/api";
+const stateWiseUrlIndia =
+  "https://api.covid19india.org/state_district_wise.json?statecode=DL";
 
 export const fetchData = async (country) => {
   let changeableUrl = url;
@@ -37,6 +39,22 @@ export const fetchCountries = async () => {
       data: { countries },
     } = await axios.get(`${url}/countries`);
     return countries.map((country) => country.name);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchStatewiseIndiaData = async () => {
+  try {
+    const data = await fetch(stateWiseUrlIndia);
+    return data.json();
+    // .then((data1) => {
+    //   for (const item of data1.Delhi) {
+    //     item.districtData;
+    //   }
+    // });
+    // const fetchedStateData = await data.json();
+    // return fetchedStateData;
   } catch (error) {
     console.log(error);
   }
